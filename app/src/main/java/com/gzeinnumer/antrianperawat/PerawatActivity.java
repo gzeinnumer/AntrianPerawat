@@ -14,7 +14,7 @@ import java.util.Collections;
 public class PerawatActivity extends AppCompatActivity {
 
     RecyclerView rvAntrian;
-    ArrayList<DataAntrian> mList = new ArrayList<>();
+    ArrayList<DataAntrian> mList;
     AdapterPerawat adapter;
 
     @Override
@@ -24,22 +24,22 @@ public class PerawatActivity extends AppCompatActivity {
         rvAntrian= findViewById(R.id.rvAntrian);
 
         initData();
-        initToRecycler();
-
-
-
     }
 
     private void initData() {
+        mList = new ArrayList<>();
         for (int i=0; i<10; i++){
             mList.add(new DataAntrian(i, "Nama Antrian "+i, "Alamat Antrian "+i));
         }
+
+        initToRecycler();
     }
 
     private void initToRecycler() {
         adapter = new AdapterPerawat(this, mList);
         rvAntrian.setHasFixedSize(true);
         rvAntrian.setLayoutManager(new LinearLayoutManager(this));
+        rvAntrian.setAdapter(adapter);
 
         setDragRecycler();
     }
